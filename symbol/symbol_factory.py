@@ -92,6 +92,18 @@ def get_config(network, data_shape, **kwargs):
         normalizations = -1
         steps = []
         return locals()
+    elif network == 'mobilenetv2':
+        from_layers = ['conv_8_pw2', 'conv_10_relu', '', '', '', '', '']
+        num_filters = [-1, -1, 512, 256, 256, 256, 256] 
+        strides = [-1, -1, 2, 2, 2, 2, 2]
+        pads = [-1, -1, 1, 1, 1, 1, 1] 
+        sizes = [[.07, .1025], [.15,.2121], [.3, .3674], [.45, .5196], [.6, .6708], \
+            [.75, .8216], [.9, .9721]] 
+        ratios = [[1,2,.5], [1,2,.5,3,1./3], [1,2,.5,3,1./3], [1,2,.5,3,1./3], \
+            [1,2,.5,3,1./3], [1,2,.5], [1,2,.5]] 
+        normalizations = -1            
+        steps = []                     
+        return locals()      
     else:
         msg = 'No configuration found for %s with data_shape %d' % (network, data_shape)
         raise NotImplementedError(msg)
